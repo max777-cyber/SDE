@@ -1,91 +1,69 @@
-import java.util.Scanner;
+import javax.swing.*;
 
 public class CadastroeConsultadeUsuarios {
 
+    static final int MAX_USUARIOS = 5;
+    static String[] nomes = new String[MAX_USUARIOS];
+    static int[] idades = new int[MAX_USUARIOS];
+    static int totalUsuarios = 0;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        String[] nomes = new String[5];
-        int[] idades = new int[5];
-        int totalUsuarios = 0;
-        int menu;
-
-        do {
-            System.out.println("\n1 - Cadastrar usuário");
-            System.out.println("2 - Listar usuários");
-            System.out.println("3 - Buscar usuário pelo nome");
-            System.out.println("4 - Sair");
-
-            menu = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (menu) {
-
-                case 1:
-                    if (totalUsuarios >= 5) {
-                        System.out.println("Limite de usuários atingido.");
-                    } else {
-                        System.out.print("Insira o nome do usuário: ");
-                        nomes[totalUsuarios] = scanner.nextLine();
-
-                        System.out.print("Insira a idade: ");
-                        idades[totalUsuarios] = scanner.nextInt();
-                        scanner.nextLine();
-
-                        totalUsuarios++;
-                        System.out.println("Usuário cadastrado com sucesso!");
-                    }
-                    break;
-                case 3:
-                	
-                    if (totalUsuarios == 0) {
-                        System.out.println("Nenhum usuário cadastrado.");
-                    } else {
-                        System.out.print("Digite o nome para buscar: ");
-                        String nomeBuscado = scanner.nextLine();
-
-                        boolean encontrado = false;
-
-                        for (int i = 0; i < totalUsuarios; i++) {
-                            if (nomes[i].equalsIgnoreCase(nomeBuscado)) {
-                                System.out.println("Usuário encontrado!");
-                                System.out.println("Nome: " + nomes[i]);
-                                System.out.println("Idade: " + idades[i]);
-                                encontrado = true;
-                                break;
-                            }
-                        }
-
-                        if (!encontrado) {
-                            System.out.println("Usuário não encontrado.");
-                        }
-                    }
-                    break;
-
-
-                case 2:
-                    if (totalUsuarios == 0) {
-                        System.out.println("Nenhum usuário cadastrado.");
-                    } else {
-                        System.out.println("\n--- Lista de Usuários ---");
-                        for (int i = 0; i < totalUsuarios; i++) {
-                            System.out.println(
-                                (i + 1) + " - Nome: " + nomes[i] + ", Idade: " + idades[i]
-                            );
-                        }
-                    }
-                    break;
-
-                case 4:
-                    System.out.println("Saindo...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida!");
+        while (true) {
+            String[] opcoes = {"1 - Cadastrar usuario", "2 - Listar usuarios", "3 - Buscar por nome", "4 - Sair"};
+            int escolha = JOptionPane.showOptionDialog(null, "Bem-vindo ao SDE!", "SDE", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, opcoes[0]);
+            if (escolha == JOptionPane.CLOSED_OPTION || escolha == 3) {
+                JOptionPane.showMessageDialog(null, "Encerrando. Ate logo!", "SDE", JOptionPane.INFORMATION_MESSAGE);
+                break;
             }
+            switch (escolha) {
+                case 0 -> cadastrarUsuario();
+                case 1 -> listarUsuarios();
+                case 2 -> buscarUsuario();
+            }
+        }
+    }
 
-        } while (menu != 4);
+    static void cadastrarUsuario() {
+        if (totalUsuarios >= MAX_USUARIOS) {
+            JOptionPane.showMessageDialog(null, "Limite atingido!", "SDE", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String nome = JOptionPane.showInputDialog(null, "Nome do usuario:", "Cadastrar", JOptionPane.PLAIN_MESSAGE);
+        if (nome == null || nome.trim().isEmpty()) return;
+        String idadeStr = JOptionPane.showInputDialog(null, "Idade:", "Cadastrar", JOptionPane.PLAIN_MESSAGE);
+        if (idadeStr == null) return;
+        try {
+            int idade = Integer.parseInt(idadeStr.trim());
+            nomes[totalUsuarios] = nome.trim();
+            idades[totalUsuarios] = idade;
+            totalUsuarios++;
+            JOptionPane.showMessageDialog(null, "Cadastrado! Nome: " + nome + " | Idade: " + idade, "SDE", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Idade invalida.", "SDE", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
-        scanner.close();
+    static void listarUsuarios() {
+        if (totalUsuarios == 0) {
+            JOptionPane.showMessageDialog(null, "Nenhum usuario cadastrado.", "Listar", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        StringBuilder sb = new StringBuilder("Usuarios cadastrados:
+");
+        for (int i = 0; i < totalUsuarios; i++) sb.append((i+1) + ". " + nomes[i] + " - " + idades[i] + " anos
+");
+        JOptionPane.showMessageDialog(null, sb.toString(), "Listar", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    static void buscarUsuario() {
+        String busca = JOptionPane.showInputDialog(null, "Nome para buscar:", "Buscar", JOptionPane.PLAIN_MESSAGE);
+        if (busca == null) return;
+        for (int i = 0; i < totalUsuarios; i++) {
+            if (nomes[i].equalsIgnoreCase(busca.trim())) {
+                JOptionPane.showMessageDialog(null, "Encontrado: " + nomes[i] + ", " + idades[i] + " anos", "Buscar", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Usuario nao encontrado.", "Buscar", JOptionPane.WARNING_MESSAGE);
     }
 }
