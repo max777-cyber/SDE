@@ -1,63 +1,58 @@
-# Sistema de Cadastro e Consulta de Usuarios
+# SDE — Sistema de Cadastro e Consulta de Usuários
 
-Sistema de gerenciamento de usuarios via terminal, desenvolvido em Java com aplicacao de conceitos de Programacao Orientada a Objetos (POO) e estruturas de dados.
+Sistema de gerenciamento de usuários desenvolvido em **Java**, com interface gráfica via **JOptionPane (Swing)**. Aplica conceitos de **Programação Orientada a Objetos (POO)** e estruturas de dados.
 
 ---
 
 ## Funcionalidades
 
-- **Cadastrar usuario** - registra nome e idade (suporta ate 5 usuarios)
-- **Listar usuarios** - exibe todos os usuarios cadastrados
-- **Buscar por nome** - localiza um usuario pelo nome (sem distincao de maiusculas/minusculas)
-- **Sair** - encerra a aplicacao
+- **Cadastrar usuário** — registra nome e idade (suporta até 5 usuários)
+- **Listar usuários** — exibe todos os usuários cadastrados em um diálogo
+- **Buscar por nome** — localiza um usuário pelo nome (sem distinção de maiúsculas/minúsculas)
+- **Sair** — encerra a aplicação
+
+---
+
+## Interface
+
+A aplicação usa **JOptionPane** para toda a interação com o usuário — sem necessidade de terminal. Cada ação abre uma janela de diálogo intuitiva.
 
 ---
 
 ## Como executar
 
-### Pre-requisitos
+### Pré-requisitos
 
-- Java JDK 8 ou superior instalado
-- IDE (Eclipse, IntelliJ) ou terminal com javac
+- Java JDK 8 ou superior
 
 ### Via terminal
 
-Clone o repositorio:
+```bash
+# Clone o repositório
 git clone https://github.com/max777-cyber/SDE.git
 
-Entre na pasta:
+# Entre na pasta src
 cd SDE/src
 
-Compile:
+# Compile
 javac CadastroeConsultadeUsuarios.java
 
-Execute:
+# Execute
 java CadastroeConsultadeUsuarios
-
----
-
-## Exemplo de uso
-
-Menu principal:
-1 - Cadastrar usuario
-2 - Listar usuarios
-3 - Buscar usuario pelo nome
-4 - Sair
-
-Exemplo de cadastro:
-Insira o nome do usuario: Maximillian
-Insira a idade: 20
-Usuario cadastrado com sucesso!
+```
 
 ---
 
 ## Tecnologias
 
 - Java (JDK 8+)
+- Swing / JOptionPane
 
 ---
 
 ## Autor
 
-Feito por Maximillian Benjamin Vicente
-GitHub: https://github.com/max777-cyber
+Feito por **Maximillian Benjamin Vicente**
+
+- GitHub: [github.com/max777-cyber](https://github.com/max777-cyber)
+- LinkedIn: [linkedin.com/in/maximillian-benjamin-vicente](https://linkedin.com/in/maximillian-benjamin-vicente)
